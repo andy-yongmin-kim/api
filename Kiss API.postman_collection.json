@@ -1,0 +1,909 @@
+{
+	"info": {
+		"_postman_id": "0e490ad1-0514-4f0f-a086-a3bd8d381cd9",
+		"name": "Kiss API",
+		"description": "Standard API of Kiss Nail Products for integrating with outside e-commerce system.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21796909"
+	},
+	"item": [
+		{
+			"name": "https://apidev.kissusa.com/orders/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "xxxxx",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "increment_id",
+							"value": "string",
+							"description": "ecommerce order id",
+							"type": "text"
+						},
+						{
+							"key": "created_at",
+							"value": "string of date format",
+							"description": "Created Order Date. YYYY-MM-DD hh:mm:ss",
+							"type": "text"
+						},
+						{
+							"key": "shipping_amount",
+							"value": "float",
+							"description": "Shipping amount",
+							"type": "text"
+						},
+						{
+							"key": "shipping_tax_amount",
+							"value": "float",
+							"description": "Shipping tax amount",
+							"type": "text"
+						},
+						{
+							"key": "shipping_method",
+							"value": "string",
+							"description": "Shipping method. It is simply information recorded in a text memo.",
+							"type": "text"
+						},
+						{
+							"key": "shipping_description",
+							"value": "string",
+							"description": "Shipping method description.It is simply information recorded in a text memo.",
+							"type": "text"
+						},
+						{
+							"key": "discount_amount",
+							"value": "float",
+							"description": "Total discount amount = order discount amount + reward point amount(reward_amount)\nThe order discount amount is the sum of the discounted amounts of all items.",
+							"type": "text"
+						},
+						{
+							"key": "reward_amount",
+							"value": "float",
+							"description": "Reward point amount. In the eCommerce platform, if the user used reward points for payment, enter the actual discount amount for the points used.",
+							"type": "text"
+						},
+						{
+							"key": "payment_trans_id",
+							"value": "string",
+							"description": "Payment Transaction ID. This value is used as a key value when matching an orderto the corresponding AR during AR Document Clearing on SAP.",
+							"type": "text"
+						},
+						{
+							"key": "tax_percentage",
+							"value": "float",
+							"description": "Tax total amount of all items. The Tax type on SAP is ZTX4.",
+							"type": "text"
+						},
+						{
+							"key": "coupon_code",
+							"value": "string",
+							"description": "Coupon Code. This value is information required by WMS and is printed on the Picking Slip. It is used only in the ecommerce platform that uses SAP's WMS process.\nThis value is stored in the REF_1 field of the SAP Order data.\nFor reference, the amount of discount you will receive from using this coupon is already included in the discount amount.",
+							"type": "text"
+						},
+						{
+							"key": "order_type",
+							"value": "string of uppercase",
+							"description": "SAP Order Document Type. \n - KISSUSA : ZSO\n - IVYKISS : ZSO\n - EXIGO : ZORB",
+							"type": "text"
+						},
+						{
+							"key": "order_reason",
+							"value": "string",
+							"description": "Order Reason. This information is stored in the comment field of SAP Order Data.",
+							"type": "text"
+						},
+						{
+							"key": "items[0][sku]",
+							"value": "string of uppercase",
+							"description": "Product Sku. \n(Important) All product skus must be idential to the SAP's product code.",
+							"type": "text"
+						},
+						{
+							"key": "items[0][product_type]",
+							"value": "string",
+							"description": "This information is not related to Exigo.\n\n(Optional)Product Type. \n - simple : (Default). The simple products are the most basic and essential ecommerce products. The simple product has no variations. It is sold individually since it has a single SKU. However, it can also be purchased as a part of a configurable, bundle or grouped product.\n - configurable : A configurable product in Magento 2 is a bit complicated version of a simple product. The difference is the following: each combination of product options has a personal SKU (Stock Keeping Unit), and it's possible to track stock inventory of every product variation.\n\nFor example, you sell t-shirts. Each t-shirt has a selection of sizes and colors. In the sample below, we've got 5 size and 3 color variations. All in all, you've got 15 variants. Creating simple products for each and every option can take lots of time. This is where a configurable product comes handy. Because it allows creating one product with several options instead of creating dozens of simple products.\n - bundle : ",
+							"type": "text"
+						},
+						{
+							"key": "items[0][item_id]",
+							"value": "integer",
+							"description": "Order Item ID in ecommerce platform",
+							"type": "text"
+						},
+						{
+							"key": "items[0][original_price]",
+							"value": "float",
+							"description": "Origin Price of item",
+							"type": "text"
+						},
+						{
+							"key": "items[0][parent_item_id]",
+							"value": "integer",
+							"description": "This information is not related to Exigo.",
+							"type": "text"
+						},
+						{
+							"key": "items[0][qty_ordered]",
+							"value": "integer",
+							"description": "Ordered quantity",
+							"type": "text"
+						},
+						{
+							"key": "items[0][price]",
+							"value": "float",
+							"description": "The actual item price applied to the order. The discounted amount is the original_price minus this price.",
+							"type": "text"
+						},
+						{
+							"key": "items[0][tax_percent]",
+							"value": "float",
+							"description": "The tax percentage imposed on the item.",
+							"type": "text"
+						},
+						{
+							"key": "items[0][tax_amount]",
+							"value": "float",
+							"description": "The tax amount imposed on the item.",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[street][0]",
+							"value": "string",
+							"description": "Street information of billing address",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[street][1]",
+							"value": "string",
+							"description": "Second street information of billing address",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[city]",
+							"value": "string",
+							"description": "City of billing address",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[region]",
+							"value": "string",
+							"description": "Region of billing address",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[region_code]",
+							"value": "string",
+							"description": "Region code of billing address",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[postcode]",
+							"value": "string",
+							"description": "Zipcode of billing address",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[country_id]",
+							"value": "string of uppercase",
+							"description": "Country ID of billing address. 2 digits.",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[firstname]",
+							"value": "string",
+							"description": "First name of billing person",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[lastname]",
+							"value": "string",
+							"description": "Last name of billing person",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[telephone]",
+							"value": "phonenumber",
+							"description": "Telephone number of billing person",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[email]",
+							"value": "email",
+							"description": "Email of billing person",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[street][0]",
+							"value": "string",
+							"description": "Street information of shipping addressstring",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[street][1]",
+							"value": "string",
+							"description": "Second street information of shipping address",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[city]",
+							"value": "string",
+							"description": "City of shipping address",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[region]",
+							"value": "string",
+							"description": "Region of shipping address",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[region_code]",
+							"value": "string",
+							"description": "Region Code of shipping address",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[postcode]",
+							"value": "string",
+							"description": "Zipcode of shipping address",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[country_id]",
+							"value": "string",
+							"description": "Country ID of shipping address",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[firstname]",
+							"value": "string",
+							"description": "First name of shipping person",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[lastname]",
+							"value": "string",
+							"description": "Last name of shipping person",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[telephone]",
+							"value": "phonenumber",
+							"description": "Telephone number of shipping person",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[email]",
+							"value": "email",
+							"description": "Email of shipping person",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://apidev.kissusa.com/orders/create",
+					"protocol": "https",
+					"host": [
+						"apidev",
+						"kissusa",
+						"com"
+					],
+					"path": [
+						"orders",
+						"create"
+					]
+				},
+				"description": "Performs persist operations that create an order on SAP for a specified order."
+			},
+			"response": [
+				{
+					"name": "https://apidev.kissusa.com/orders/create",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "increment_id",
+									"value": "0000000001",
+									"description": "SAP Order Document Type",
+									"type": "text"
+								},
+								{
+									"key": "created_at",
+									"value": "2022-06-17 20:14:15",
+									"description": "SAP Sales Organization",
+									"type": "text"
+								},
+								{
+									"key": "shipping_amount",
+									"value": "24.00",
+									"description": "SAP Sales Distributin Channel",
+									"type": "text"
+								},
+								{
+									"key": "shipping_tax_amount",
+									"value": "0",
+									"description": "SAP Sales Division",
+									"type": "text"
+								},
+								{
+									"key": "shipping_method",
+									"value": "UPS",
+									"description": "SAP Customer ID",
+									"type": "text"
+								},
+								{
+									"key": "shipping_description",
+									"value": "UPS Description",
+									"description": "SAP Purchase Order Date",
+									"type": "text"
+								},
+								{
+									"key": "discount_amount",
+									"value": "1",
+									"description": "SAP Purchase Order No",
+									"type": "text"
+								},
+								{
+									"key": "reward_amount",
+									"value": "0",
+									"description": "SAP Request Order Date",
+									"type": "text"
+								},
+								{
+									"key": "payment_trans_id",
+									"value": "3djkxkdi938kkkapk",
+									"description": "SAP Purchase Order Method",
+									"type": "text"
+								},
+								{
+									"key": "tax_percentage",
+									"value": "8",
+									"description": "SAP Order Block",
+									"type": "text"
+								},
+								{
+									"key": "coupon_code",
+									"value": "grand_open",
+									"description": "Business Type",
+									"type": "text"
+								},
+								{
+									"key": "order_type",
+									"value": "ZORB",
+									"description": "Payment Transaction ID",
+									"type": "text"
+								},
+								{
+									"key": "order_reason",
+									"value": "",
+									"description": "Total price of all items",
+									"type": "text"
+								},
+								{
+									"key": "items[0][sku]",
+									"value": "NDS04",
+									"description": "Total discount amount of all items",
+									"type": "text"
+								},
+								{
+									"key": "items[0][product_type]",
+									"value": "simple",
+									"description": "Grand total amount of all items. \ngrand_total = price_total + discount_total",
+									"type": "text"
+								},
+								{
+									"key": "items[0][item_id]",
+									"value": "1234",
+									"description": "Tax total amount of all items",
+									"type": "text"
+								},
+								{
+									"key": "items[0][original_price]",
+									"value": "8",
+									"description": "Shipping amount",
+									"type": "text"
+								},
+								{
+									"key": "items[0][parent_item_id]",
+									"value": "34",
+									"description": "Shipping tax amount",
+									"type": "text"
+								},
+								{
+									"key": "items[0][qty_ordered]",
+									"value": "4",
+									"description": "Reward point amouont",
+									"type": "text"
+								},
+								{
+									"key": "items[0][price]",
+									"value": "3",
+									"description": "Paid total amount\ntotal_paid = grand_total + tax_total + shipping_amount + shipping_tax_amount - reward_amount",
+									"type": "text"
+								},
+								{
+									"key": "items[0][tax_percent]",
+									"value": "10",
+									"description": "Shipping method",
+									"type": "text"
+								},
+								{
+									"key": "items[0][tax_amount]",
+									"value": "0.5",
+									"description": "Shipping method description",
+									"type": "text"
+								},
+								{
+									"key": "billing_address[street][0]",
+									"value": "240-97 68ave",
+									"description": "Shipping customer memo to be shown on picking slip",
+									"type": "text"
+								},
+								{
+									"key": "billing_address[street][1]",
+									"value": "#2FL",
+									"description": "Customer memo to be shown on SAP Order for customer service team",
+									"type": "text"
+								},
+								{
+									"key": "billing_address[city]",
+									"value": "Little Neck",
+									"description": "(Optional)Product Type. \n - consumable : (Default)",
+									"type": "text"
+								},
+								{
+									"key": "billing_address[region]",
+									"value": "New York",
+									"description": "Product Sku. \n(Important) All product skus must be idential to the SAP's product code.",
+									"type": "text"
+								},
+								{
+									"key": "billing_address[region_code]",
+									"value": "NY",
+									"description": "Ordered quantity",
+									"type": "text"
+								},
+								{
+									"key": "billing_address[postcode]",
+									"value": "11362",
+									"description": "Product Price",
+									"type": "text"
+								},
+								{
+									"key": "billing_address[country_id]",
+									"value": "US",
+									"description": "Discount amount of product",
+									"type": "text"
+								},
+								{
+									"key": "billing_address[firstname]",
+									"value": "Daniel",
+									"description": "Total amount of product\ntotal_amount = price - discount_amount",
+									"type": "text"
+								},
+								{
+									"key": "billing_address[lastname]",
+									"value": "Kim",
+									"description": "Tax amount on total_amount of product",
+									"type": "text"
+								},
+								{
+									"key": "billing_address[telephone]",
+									"value": "111-222-3333",
+									"description": "Street of billing address",
+									"type": "text"
+								},
+								{
+									"key": "billing_address[email]",
+									"value": "daniel@gmail.com",
+									"description": "City of billing address",
+									"type": "text"
+								},
+								{
+									"key": "shipping_address[street][0]",
+									"value": "210St 45Ave",
+									"description": "Rigion of billing address",
+									"type": "text"
+								},
+								{
+									"key": "shipping_address[street][1]",
+									"value": "1FL",
+									"description": "Zipcode of billing address",
+									"type": "text"
+								},
+								{
+									"key": "shipping_address[city]",
+									"value": "Bayside",
+									"description": "Country ID of billing address",
+									"type": "text"
+								},
+								{
+									"key": "shipping_address[region]",
+									"value": "New York",
+									"description": "Full name of billing person",
+									"type": "text"
+								},
+								{
+									"key": "shipping_address[region_code]",
+									"value": "NY",
+									"description": "Telephone number of billing person",
+									"type": "text"
+								},
+								{
+									"key": "shipping_address[postcode]",
+									"value": "11361",
+									"description": "Email of billing person",
+									"type": "text"
+								},
+								{
+									"key": "shipping_address[country_id]",
+									"value": "US",
+									"description": "Street of shipping address",
+									"type": "text"
+								},
+								{
+									"key": "shipping_address[firstname]",
+									"value": "Isaac",
+									"description": "City of shipping address",
+									"type": "text"
+								},
+								{
+									"key": "shipping_address[lastname]",
+									"value": "Park",
+									"description": "Rigion of shipping address",
+									"type": "text"
+								},
+								{
+									"key": "shipping_address[telephone]",
+									"value": "999-888-7777",
+									"description": "Zipcode of shipping address",
+									"type": "text"
+								},
+								{
+									"key": "shipping_address[email]",
+									"value": "isaac@outlook.com",
+									"description": "Country ID of shipping address",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://apidev.kissusa.com/orders/create",
+							"protocol": "https",
+							"host": [
+								"apidev",
+								"kissusa",
+								"com"
+							],
+							"path": [
+								"orders",
+								"create"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "Success\n{\n    \"result\": true,\n    \"msg\": \"Success\",\n    \"erpOrderNo\": \"0001052719\",\n    \"webOrderNo\": \"0000000001\"\n}\n\nFail - Case1 : When occurred an error from SAP\n{\n    \"result\": false,\n    \"error_code\": \"E01\",\n    \"msg\": \"The RFC Function is called successfully but have some errors.<br>Material NDS04G is not defined for sales org.4028,  distr.chan.01,  language EN\",\n    \"erpOrderNo\": \"\",\n    \"webOrderNo\": \"0000000001\"\n}\n\nFail - Case2 : When the web order was already transferred on SAP.\n{\n    \"result\": false,\n    \"msg\": \"The web order(0000000001) was already transferred. The PO# of the SAP order is BSHGLO_0000000001.\",\n    \"error_code\": \"E02\",\n    \"erpOrderNo\": \"\",\n    \"webOrderNo\": \"0000000001\"\n}\n\nFail - Case3 : Unkouwn Error\n{\n    \"result\": false,\n    \"error_code\" : \"E99\",\n    \"msg\" : \"Unknown error message \",\n}"
+				}
+			]
+		},
+		{
+			"name": "Exigo Test",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "xxxxx",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "increment_id",
+							"value": "string",
+							"description": "ecommerce order id",
+							"type": "text"
+						},
+						{
+							"key": "created_at",
+							"value": "string of date format",
+							"description": "Created Order Date. YYYY-MM-DD hh:mm:ss",
+							"type": "text"
+						},
+						{
+							"key": "shipping_amount",
+							"value": "float",
+							"description": "Shipping amount",
+							"type": "text"
+						},
+						{
+							"key": "shipping_tax_amount",
+							"value": "float",
+							"description": "Shipping tax amount",
+							"type": "text"
+						},
+						{
+							"key": "shipping_method",
+							"value": "string",
+							"description": "Shipping method. It is simply information recorded in a text memo.",
+							"type": "text"
+						},
+						{
+							"key": "shipping_description",
+							"value": "string",
+							"description": "Shipping method description.It is simply information recorded in a text memo.",
+							"type": "text"
+						},
+						{
+							"key": "discount_amount",
+							"value": "float",
+							"description": "Total discount amount = order discount amount + reward point amount(reward_amount)\nThe order discount amount is the sum of the discounted amounts of all items.",
+							"type": "text"
+						},
+						{
+							"key": "reward_amount",
+							"value": "float",
+							"description": "Reward point amount. In the eCommerce platform, if the user used reward points for payment, enter the actual discount amount for the points used.",
+							"type": "text"
+						},
+						{
+							"key": "payment_trans_id",
+							"value": "string",
+							"description": "Payment Transaction ID. This value is used as a key value when matching an orderto the corresponding AR during AR Document Clearing on SAP.",
+							"type": "text"
+						},
+						{
+							"key": "tax_percentage",
+							"value": "float",
+							"description": "Tax total amount of all items. The Tax type on SAP is ZTX4.",
+							"type": "text"
+						},
+						{
+							"key": "coupon_code",
+							"value": "string",
+							"description": "Coupon Code. This value is information required by WMS and is printed on the Picking Slip. It is used only in the ecommerce platform that uses SAP's WMS process.\nThis value is stored in the REF_1 field of the SAP Order data.\nFor reference, the amount of discount you will receive from using this coupon is already included in the discount amount.",
+							"type": "text"
+						},
+						{
+							"key": "order_type",
+							"value": "string of uppercase",
+							"description": "SAP Order Document Type. \n - KISSUSA : ZSO\n - IVYKISS : ZSO\n - EXIGO : ZORB",
+							"type": "text"
+						},
+						{
+							"key": "order_reason",
+							"value": "string",
+							"description": "Order Reason. This information is stored in the comment field of SAP Order Data.",
+							"type": "text"
+						},
+						{
+							"key": "items[0][sku]",
+							"value": "string of uppercase",
+							"description": "Product Sku. \n(Important) All product skus must be idential to the SAP's product code.",
+							"type": "text"
+						},
+						{
+							"key": "items[0][product_type]",
+							"value": "string",
+							"description": "This information is not related to Exigo.\n\n(Optional)Product Type. \n - simple : (Default). The simple products are the most basic and essential ecommerce products. The simple product has no variations. It is sold individually since it has a single SKU. However, it can also be purchased as a part of a configurable, bundle or grouped product.\n - configurable : A configurable product in Magento 2 is a bit complicated version of a simple product. The difference is the following: each combination of product options has a personal SKU (Stock Keeping Unit), and it's possible to track stock inventory of every product variation.\n\nFor example, you sell t-shirts. Each t-shirt has a selection of sizes and colors. In the sample below, we've got 5 size and 3 color variations. All in all, you've got 15 variants. Creating simple products for each and every option can take lots of time. This is where a configurable product comes handy. Because it allows creating one product with several options instead of creating dozens of simple products.\n - bundle : ",
+							"type": "text"
+						},
+						{
+							"key": "items[0][item_id]",
+							"value": "integer",
+							"description": "Order Item ID in ecommerce platform",
+							"type": "text"
+						},
+						{
+							"key": "items[0][original_price]",
+							"value": "float",
+							"description": "Origin Price of item",
+							"type": "text"
+						},
+						{
+							"key": "items[0][parent_item_id]",
+							"value": "integer",
+							"description": "This information is not related to Exigo.",
+							"type": "text"
+						},
+						{
+							"key": "items[0][qty_ordered]",
+							"value": "integer",
+							"description": "Ordered quantity",
+							"type": "text"
+						},
+						{
+							"key": "items[0][price]",
+							"value": "float",
+							"description": "The actual item price applied to the order. The discounted amount is the original_price minus this price.",
+							"type": "text"
+						},
+						{
+							"key": "items[0][tax_percent]",
+							"value": "float",
+							"description": "The tax percentage imposed on the item.",
+							"type": "text"
+						},
+						{
+							"key": "items[0][tax_amount]",
+							"value": "float",
+							"description": "The tax amount imposed on the item.",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[street][0]",
+							"value": "string",
+							"description": "Street information of billing address",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[street][1]",
+							"value": "string",
+							"description": "Second street information of billing address",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[city]",
+							"value": "string",
+							"description": "City of billing address",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[region]",
+							"value": "string",
+							"description": "Region of billing address",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[region_code]",
+							"value": "string",
+							"description": "Region code of billing address",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[postcode]",
+							"value": "string",
+							"description": "Zipcode of billing address",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[country_id]",
+							"value": "string of uppercase",
+							"description": "Country ID of billing address. 2 digits.",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[firstname]",
+							"value": "string",
+							"description": "First name of billing person",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[lastname]",
+							"value": "string",
+							"description": "Last name of billing person",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[telephone]",
+							"value": "phonenumber",
+							"description": "Telephone number of billing person",
+							"type": "text"
+						},
+						{
+							"key": "billing_address[email]",
+							"value": "email",
+							"description": "Email of billing person",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[street][0]",
+							"value": "string",
+							"description": "Street information of shipping addressstring",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[street][1]",
+							"value": "string",
+							"description": "Second street information of shipping address",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[city]",
+							"value": "string",
+							"description": "City of shipping address",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[region]",
+							"value": "string",
+							"description": "Region of shipping address",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[region_code]",
+							"value": "string",
+							"description": "Region Code of shipping address",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[postcode]",
+							"value": "string",
+							"description": "Zipcode of shipping address",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[country_id]",
+							"value": "string",
+							"description": "Country ID of shipping address",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[firstname]",
+							"value": "string",
+							"description": "First name of shipping person",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[lastname]",
+							"value": "string",
+							"description": "Last name of shipping person",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[telephone]",
+							"value": "phonenumber",
+							"description": "Telephone number of shipping person",
+							"type": "text"
+						},
+						{
+							"key": "shipping_address[email]",
+							"value": "email",
+							"description": "Email of shipping person",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://apidev.kissusa.com/orders/create",
+					"protocol": "https",
+					"host": [
+						"apidev",
+						"kissusa",
+						"com"
+					],
+					"path": [
+						"orders",
+						"create"
+					]
+				},
+				"description": "Performs persist operations that create an order on SAP for a specified order."
+			},
+			"response": []
+		}
+	]
+}
